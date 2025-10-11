@@ -28,7 +28,6 @@ typedef struct _linkedlist
 
 // You should not change the prototype of this function
 void moveOddItemsToBack(LinkedList *ll);
-
 void printList(LinkedList *ll);
 void removeAllItems(LinkedList *ll);
 ListNode * findNode(LinkedList *ll, int index);
@@ -87,6 +86,31 @@ int main()
 void moveOddItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+
+	if(ll == NULL || ll -> head == NULL)
+	return;
+
+	int origin_size = ll ->size;
+	int index = 0;
+	ListNode * cur = ll ->head;
+
+	while(index < origin_size)
+	{
+		if(cur -> item % 2 != 0)
+		{
+			int odd = cur -> item;
+			cur = cur -> next;
+			removeNode(ll, index);
+			insertNode(ll, ll -> size, odd);
+			origin_size--;
+		}
+		else
+		{
+			cur = cur -> next;
+			index++;
+		}
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -213,3 +237,21 @@ int removeNode(LinkedList *ll, int index){
 
 	return -1;
 }
+
+
+	// int index = 0;
+	// ListNode * cur = ll -> head;
+	// ListNode * temp;
+
+	// while(cur != NULL)
+	// {
+	// 	if(cur->item % 2 != 0)
+	// 	{
+	// 		if(index == 0)
+	// 		continue;
+
+			
+	// 	}
+
+	// 	index++;
+	// }

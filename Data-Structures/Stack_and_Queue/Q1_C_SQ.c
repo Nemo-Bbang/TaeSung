@@ -113,15 +113,60 @@ int main()
 
 
 //////////////////////////////////////////////////////////////////////////////////
+// typedef struct _listnode
+// {
+// 	int item;
+// 	struct _listnode *next;
+// } ListNode;	// You should not change the definition of ListNode
+
+// typedef struct _linkedlist
+// {
+// 	int size;
+// 	ListNode *head;
+// } LinkedList;	// You should not change the definition of LinkedList
+
+
+// typedef struct _queue
+// {
+// 	LinkedList ll;
+// } Queue;
 
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
-	/* add your code here */
+	if(ll == NULL || q == NULL || ll ->head == NULL)
+	return;
+
+	ListNode * cur = ll -> head;
+
+	while(cur != NULL)
+	{
+		enqueue(q, cur ->item);
+		cur = cur -> next;
+	}
 }
 
 void removeOddValues(Queue *q)
 {
-	/* add your code here */
+	if(q == NULL)
+	return;
+
+	int index = 0;
+	ListNode * cur = q -> ll.head;
+
+	while(cur != NULL)
+	{
+		if(cur -> item % 2 != 0)
+		{
+			ListNode * next = cur -> next;
+			removeNode(&(q -> ll), index);
+			cur = next;
+		}
+		else
+		{
+			cur = cur -> next;
+			index++;
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////
