@@ -105,6 +105,52 @@ int main()
 int balanced(char *expression)
 {
 /* add your code here */
+	if(expression == NULL)
+	return 1;
+
+	int size = 0;
+	while(expression[size] != 0)
+	size++;
+
+
+	if(size % 2 != 0)
+	return 1;
+
+	Stack s;
+	s.ll.head = NULL;
+	s.ll.size = 0;
+
+	int count = 0;
+	while(count < size)
+	{
+		if(expression[count] == '(' || expression[count] == '{' || expression[count] == '[')
+		push(&s, expression[count]);
+		else
+		{
+			int check = peek(&s);
+
+			if(check == MIN_INT)
+			return 1;
+
+			if(check == '(')
+				if(abs(check - expression[count]) != 1)
+					return 1;
+				else
+					pop(&s);
+			else if(check == '{' || check == '[')
+				if(abs(check - expression[count]) != 2) 
+					return 1;
+				else
+					pop(&s);
+		}
+		count ++;
+	}
+
+	if(isEmptyStack(&s))
+	return 0;
+	else
+	return 1;
+
 }
 
 ////////////////////////////////////////////////////////////

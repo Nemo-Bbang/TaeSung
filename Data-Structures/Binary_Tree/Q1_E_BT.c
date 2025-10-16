@@ -116,12 +116,21 @@ int main()
 int identical(BTNode *tree1, BTNode *tree2)
 
 {
+    if(tree1 == NULL && tree2 == NULL)
+    return 1;
+    
+    if(tree1 == NULL || tree2 == NULL)
+    return 0;
+    
+
+    return (tree1 -> item == tree2 -> item) && identical(tree1 ->left, tree2 -> left) && identical(tree1 ->right, tree2 -> right); 
+
    /* add your code here */
 }
 
 /////////////////////////////////////////////////////////////////////////////////
 
-BTNode *createBTNode(int item){
+BTNode* createBTNode(int item){
     BTNode *newNode = malloc(sizeof(BTNode));
     newNode->item = item;
     newNode->left = NULL;
@@ -130,7 +139,14 @@ BTNode *createBTNode(int item){
 }
 
 //////////////////////////////////////////////////////////////////////////////////
+// typedef struct _stackNode{
+//     BTNode *btnode;
+//     struct _stackNode *next;
+// }StackNode;
 
+// typedef struct _stack{
+//     StackNode *top;
+// }Stack;
 
 BTNode *createTree()
 {

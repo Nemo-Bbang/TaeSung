@@ -102,7 +102,29 @@ int main()
 
 int smallestValue(BTNode *node)
 {
+    int left_node;
+    int right_node;
+    int smallest;
 	/* add your code here */
+    if(node == NULL)
+    return -1;
+
+    int value = node -> item;
+    left_node = smallestValue(node -> left);
+    right_node = smallestValue(node -> right);
+
+    if(left_node == -1 && right_node == -1)
+    return value;
+
+    if(left_node == -1 && right_node != -1)
+    return value < right_node ? value : right_node;
+
+    if(left_node != -1 && right_node == -1)
+    return value < left_node ? value : left_node;
+
+    smallest = (left_node < right_node ? left_node : right_node);
+    return value < smallest ? value : smallest;
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////

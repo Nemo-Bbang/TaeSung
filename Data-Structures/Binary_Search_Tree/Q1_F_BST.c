@@ -51,6 +51,7 @@ int main()
 	c = 1;
 
 	//Initialize the Binary Search Tree as an empty Binary Search Tree
+
 	BSTNode *root;
 	root = NULL;
 
@@ -93,8 +94,31 @@ int main()
 
 void levelOrderTraversal(BSTNode* root)
 {
+	
+	 if (root == NULL) return;
 
-    /* add your code here */
+    QueueNode *head = NULL;
+    QueueNode *tail = NULL;
+
+    // 루트 노드를 큐에 넣기
+    enqueue(&head, &tail, root);
+
+    while (!isEmpty(head)) {
+        // 큐에서 하나 꺼내기
+        BSTNode *current = dequeue(&head, &tail);
+
+        // 현재 노드 출력
+        printf("%d ", current->item);
+
+        // 왼쪽 자식이 있으면 큐에 넣기
+        if (current->left != NULL)
+            enqueue(&head, &tail, current->left);
+
+        // 오른쪽 자식이 있으면 큐에 넣기
+        if (current->right != NULL)
+            enqueue(&head, &tail, current->right);
+    }
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -126,6 +150,26 @@ void insertBSTNode(BSTNode **node, int value){
 }
 
 //////////////////////////////////////////////////////////////////////////////////
+
+
+
+// typedef struct _bstnode{
+// 	int item;
+// 	struct _bstnode *left;
+// 	struct _bstnode *right;
+// } BSTNode;   // You should not change the definition of BSTNode
+
+// typedef struct _QueueNode {
+// 	BSTNode *data;
+// 	struct _QueueNode *nextPtr;
+// }QueueNode; // You should not change the definition of QueueNode
+
+
+// typedef struct _queue
+// {
+// 	QueueNode *head;
+// 	QueueNode *tail;
+// }Queue; // You should not change the definition of queue
 
 // enqueue node
 void enqueue(QueueNode **headPtr, QueueNode **tailPtr, BSTNode *node)
